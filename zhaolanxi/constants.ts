@@ -139,5 +139,6 @@ export const RESUME_DATA: ResumeData = {
     "大学生数学建模竞赛上海赛区二等奖",
     "河南省数学竞赛省级二等奖",
     "乒乓球比赛豫西地区二等奖"
-  ]
+  ],
+  resumePdfUrl: (import.meta as any).env?.VITE_RESUME_PDF_URL || ''
 };

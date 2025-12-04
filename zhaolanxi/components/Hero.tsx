@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Download } from 'lucide-react';
 import { RESUME_DATA } from '../constants';
 
 export const Hero: React.FC = () => {
-  const { name, title, contact } = RESUME_DATA;
+  const { name, title, contact, resumePdfUrl } = RESUME_DATA;
 
   return (
     <section id="about" className="pt-32 pb-16 md:pt-48 md:pb-32 px-4 max-w-6xl mx-auto flex flex-col items-start justify-center animate-in fade-in duration-700">
@@ -36,11 +36,26 @@ export const Hero: React.FC = () => {
         </div>
 
         <div className="pt-4">
-           {/* Mock download button */}
-           <button className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-transform active:scale-95 shadow-md shadow-blue-200">
-             <Download size={20} />
-             下载简历 PDF
-           </button>
+          {resumePdfUrl ? (
+            <a
+              href={resumePdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-transform active:scale-95 shadow-md shadow-blue-200"
+            >
+              <Download size={20} />
+              下载简历 PDF
+            </a>
+          ) : (
+            <button
+              onClick={() => window.print()}
+              className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-transform active:scale-95 shadow-md shadow-blue-200"
+            >
+              <Download size={20} />
+              下载简历 PDF
+            </button>
+          )}
         </div>
       </div>
     </section>

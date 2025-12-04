@@ -44,4 +44,5 @@ export interface ResumeData {
   projects: Project[];
   skills: SkillCategory[];
   honors: string[];
+  resumePdfUrl?: string;
 }
