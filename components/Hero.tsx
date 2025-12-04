@@ -4,7 +4,7 @@ import { ArrowRight, Github } from 'lucide-react';
 const Hero: React.FC = () => {
   const preFiles = import.meta.glob('../assets/pre/*.{jpg,jpeg,png,webp}', { eager: true, query: '?url', import: 'default' });
   const svgFiles = import.meta.glob('../assets/svg/*.{svg,png}', { eager: true, query: '?url', import: 'default' });
-  const bilibiliIcon = Object.entries(svgFiles).find(([p]) => /bilbili/i.test(p))?.[1] as string | undefined;
+  const bilibiliIcon = Object.entries(svgFiles).find(([p]) => /bilibili/i.test(p))?.[1] as string | undefined;
   const redbookIcon = Object.entries(svgFiles).find(([p]) => /(redbook|xiaohongshu|xhs)/i.test(p))?.[1] as string | undefined;
   const preEntries = Object.entries(preFiles).map(([p, url]) => ({ p, url: url as string })).sort((a, b) => a.p.localeCompare(b.p));
   const portraitEnv = (import.meta.env?.VITE_PROFILE_IMAGE_URL as string) || '';
@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-             Backend Engineer |
+             Backend Engineer &
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">
               AI Apprentice

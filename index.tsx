@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import Resume from './components/Resume';
+import ZhaolanxiResume from './components/ZhaolanxiResume';
 import Gallery from './components/Gallery';
 
 const rootElement = document.getElementById('root');
@@ -30,7 +30,7 @@ const Router: React.FC = () => {
     window.addEventListener('popstate', handler);
     return () => window.removeEventListener('popstate', handler);
   }, []);
-  if (path === '/resume') return <Resume />;
+  if (path === '/resume') return <ZhaolanxiResume />;
   if (path === '/gallery') return <Gallery />;
   return <App />;
 };

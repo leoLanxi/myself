@@ -25,7 +25,7 @@ const Gallery: React.FC = () => {
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <Header />
       <main className="pt-24">
-        <section className="py-24 bg白">
+        <section className="py-24 bg-white">
           <div className="container mx-auto px-6">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
               <div>
