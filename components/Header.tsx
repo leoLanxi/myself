@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Terminal, Camera, BookOpen, FileText } from 'lucide-react';
+import { Menu, X, Terminal, Camera, BookOpen, FileText, Gamepad } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
