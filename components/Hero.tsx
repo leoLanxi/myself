@@ -1,8 +1,11 @@
 import React from 'react';
-import { ArrowRight, Github, PlayCircle, Sparkles } from 'lucide-react';
+import { ArrowRight, Github } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const preFiles = import.meta.glob('../assets/pre/*.{jpg,jpeg,png,webp}', { eager: true, as: 'url' });
+  const iconFiles = import.meta.glob('../assets/icons/*.{svg,png}', { eager: true, as: 'url' });
+  const bilibiliIcon = Object.entries(iconFiles).find(([p]) => /bilibili/i.test(p))?.[1] as string | undefined;
+  const xhsIcon = Object.entries(iconFiles).find(([p]) => /(xiaohongshu|xhs)/i.test(p))?.[1] as string | undefined;
   const preEntries = Object.entries(preFiles).map(([p, url]) => ({ p, url: url as string })).sort((a, b) => a.p.localeCompare(b.p));
   const portraitEnv = (import.meta.env?.VITE_PROFILE_IMAGE_URL as string) || '';
   const portraitSrc = preEntries[0]?.url || portraitEnv || 'https://picsum.photos/800/800?grayscale';
@@ -37,8 +40,12 @@ const Hero: React.FC = () => {
             </a>
             <div className="flex items-center gap-4 px-4">
               <a href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors"><Github size={24} /></a>
-              <a href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors"><PlayCircle size={24} /></a>
-              <a href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-500 transition-colors"><Sparkles size={24} /></a>
+              <a href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer" className="transition-opacity">
+                {bilibiliIcon ? <img src={bilibiliIcon} alt="Bilibili" className="w-6 h-6 opacity-70 hover:opacity-100" /> : <img src="https://static.bilibili.com/favicon.ico" alt="Bilibili" className="w-6 h-6 opacity-70 hover:opacity-100" />}
+              </a>
+              <a href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer" className="transition-opacity">
+                {xhsIcon ? <img src={xhsIcon} alt="Xiaohongshu" className="w-6 h-6 opacity-70 hover:opacity-100" /> : <span className="w-6 h-6 inline-block rounded bg-red-500 text-white text-xs flex items-center justify-center">RED</span>}
+              </a>
             </div>
           </div>
           

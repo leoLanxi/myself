@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="flex items-center gap-6 text-sm text-gray-600">
-            <a href="#work" className="hover:text-black transition-colors">Work</a>
+            <a href="#work" className="hover:text-black transition-colors">Menu</a>
             <a href="#photography" className="hover:text-black transition-colors">Photography</a>
             <a href="#contact" className="hover:text-black transition-colors">Contact</a>
           </div>

@@ -16,8 +16,8 @@ const Header: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Resume', href: 'resume', icon: <FileText size={18} /> },
-    { name: 'Games', href: 'http://124.221.198.43/', icon: <Terminal size={18} /> },
+    { name: 'Resume', href: 'resume', icon: <FileText size={18} />, external: false },
+    { name: 'Games', href: 'http://124.221.198.43/', icon: <Terminal size={18} />, external: true },
   ];
 
   return (
@@ -62,7 +62,7 @@ const Header: React.FC = () => {
               className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
             >
               <Terminal size={18} />
-              Work
+              Menu
             </a>
             <div 
               className={`absolute mt-2 left-0 w-44 bg-white border border-gray-100 shadow-lg rounded-xl p-2 transition-all duration-200 ${workOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-1 pointer-events-none'}`}
@@ -94,6 +94,8 @@ const Header: React.FC = () => {
               key={link.name} 
               href={link.href} 
               className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
             >
               {link.icon}
               {link.name}
@@ -125,7 +127,7 @@ const Header: React.FC = () => {
               className="flex items-center gap-3 p-2 text-gray-700 hover:bg-gray-50 rounded-lg"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Terminal size={18} /> Work
+              <Terminal size={18} /> Menu
             </a>
             <div className="pl-6 flex flex-col">
               <a 
@@ -149,6 +151,8 @@ const Header: React.FC = () => {
                 href={link.href}
                 className="flex items-center gap-3 p-2 text-gray-700 hover:bg-gray-50 rounded-lg"
                 onClick={() => setMobileMenuOpen(false)}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
               >
                 {link.icon}
                 {link.name}
