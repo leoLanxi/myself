@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import Resume from './components/Resume';
+import Gallery from './components/Gallery';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -12,7 +13,16 @@ const Router: React.FC = () => {
   const getRoute = () => {
     const url = new URL(window.location.href);
     const p = url.searchParams.get('p');
-    return p ? '/' + p.replace(/^\//, '') : window.location.pathname;
+    if (p) return '/' + p.replace(/^\//, '');
+    const pathname = window.location.pathname;
+    const segs = pathname.split('/').filter(Boolean);
+    // Normalize GitHub Pages project base: /<repo>/<path> -> /<path>
+    if (segs.length > 1) {
+      const repo = segs[0];
+      const rest = segs.slice(1).join('/');
+      return '/' + rest;
+    }
+    return pathname;
   };
   const [path, setPath] = useState(getRoute());
   useEffect(() => {
@@ -21,6 +31,7 @@ const Router: React.FC = () => {
     return () => window.removeEventListener('popstate', handler);
   }, []);
   if (path === '/resume') return <Resume />;
+  if (path === '/gallery') return <Gallery />;
   return <App />;
 };
 

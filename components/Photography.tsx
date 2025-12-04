@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Photo } from '../types';
 
-const photos: Photo[] = [
+const fallbackPhotos: Photo[] = [
   { id: '1', url: 'https://picsum.photos/600/800?random=1', caption: 'Urban Solitude', heightClass: 'h-96' },
   { id: '2', url: 'https://picsum.photos/600/400?random=2', caption: 'Cyberpunk Neon', heightClass: 'h-64' },
   { id: '3', url: 'https://picsum.photos/600/600?random=3', caption: 'Geometric Shadows', heightClass: 'h-72' },
@@ -11,6 +11,25 @@ const photos: Photo[] = [
 ];
 
 const Photography: React.FC = () => {
+  const photos = useMemo<Photo[]>(() => {
+    const files = import.meta.glob('../assets/photos/show/*.{jpg,jpeg,png,webp}', { eager: true, as: 'url' });
+    const entries = Object.entries(files)
+      .map(([path, url]) => ({ path, url: url as string }))
+      .sort((a, b) => a.path.localeCompare(b.path));
+    if (entries.length === 0) return fallbackPhotos;
+    const heights = ['h-64', 'h-72', 'h-80', 'h-96'];
+    return entries.map((e, idx) => {
+      const name = e.path.split('/').pop() || `photo-${idx + 1}`;
+      const caption = name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+      return {
+        id: String(idx + 1),
+        url: e.url,
+        caption,
+        heightClass: heights[idx % heights.length],
+      };
+    });
+  }, []);
+
   return (
     <section id="photography" className="py-24 bg-white">
       <div className="container mx-auto px-6">
@@ -21,7 +40,12 @@ const Photography: React.FC = () => {
               When I'm not training models, I'm capturing moments. Exploring the intersection of urban structure and natural chaos.
             </p>
           </div>
-          <a href="#" className="hidden md:block text-blue-600 font-medium hover:underline">View Full Gallery</a>
+          <a
+            href="gallery"
+            className="hidden md:block text-blue-600 font-medium hover:underline"
+          >
+            View Full Gallery
+          </a>
         </div>
 
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
@@ -42,7 +66,7 @@ const Photography: React.FC = () => {
         </div>
         
         <div className="mt-8 md:hidden text-center">
-          <a href="#" className="text-blue-600 font-medium hover:underline">View Full Gallery</a>
+          <a href="gallery" className="text-blue-600 font-medium hover:underline">View Full Gallery</a>
         </div>
       </div>
     </section>
