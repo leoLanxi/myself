@@ -2,8 +2,8 @@ import React from 'react';
 import { ArrowRight, Github } from 'lucide-react';
 
 const Hero: React.FC = () => {
-  const preFiles = import.meta.glob('../assets/pre/*.{jpg,jpeg,png,webp}', { eager: true, as: 'url' });
-  const iconFiles = import.meta.glob('../assets/icons/*.{svg,png}', { eager: true, as: 'url' });
+  const preFiles = import.meta.glob('../assets/pre/*.{jpg,jpeg,png,webp}', { eager: true, query: '?url', import: 'default' });
+  const iconFiles = import.meta.glob('../assets/icons/*.{svg,png}', { eager: true, query: '?url', import: 'default' });
   const bilibiliIcon = Object.entries(iconFiles).find(([p]) => /bilibili/i.test(p))?.[1] as string | undefined;
   const xhsIcon = Object.entries(iconFiles).find(([p]) => /(xiaohongshu|xhs)/i.test(p))?.[1] as string | undefined;
   const preEntries = Object.entries(preFiles).map(([p, url]) => ({ p, url: url as string })).sort((a, b) => a.p.localeCompare(b.p));

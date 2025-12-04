@@ -4,7 +4,7 @@ import Footer from './Footer';
 
 const Gallery: React.FC = () => {
   const photos = useMemo(() => {
-    const files = import.meta.glob('../assets/photos/*.{jpg,jpeg,png,webp}', { eager: true, as: 'url' });
+    const files = import.meta.glob('../assets/photos/*.{jpg,jpeg,png,webp}', { eager: true, query: '?url', import: 'default' });
     const entries = Object.entries(files)
       .map(([path, url]) => ({ path, url: url as string }))
       .sort((a, b) => a.path.localeCompare(b.path));

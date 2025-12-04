@@ -17,7 +17,7 @@ const Header: React.FC = () => {
 
   const navLinks = [
     { name: 'Resume', href: 'resume', icon: <FileText size={18} />, external: false },
-    { name: 'Games', href: 'http://124.221.198.43/', icon: <Terminal size={18} />, external: true },
+    { name: 'Stroop Game', href: 'http://124.221.198.43/', icon: <Gamepad size={18} />, external: true },
   ];
 
   return (
@@ -35,7 +35,7 @@ const Header: React.FC = () => {
             const seg = window.location.pathname.split('/')[1];
             const base = seg ? `/${seg}/` : '/';
             window.history.pushState({}, '', base);
-            window.dispatchEvent(new PopStateEvent('popstate'));
+            window.dispatchEvent(new Event('popstate'));
           }}
         >
           <div className="w-8 h-8 bg-black text-white rounded-lg flex items-center justify-center font-mono font-bold text-lg group-hover:bg-blue-600 transition-colors">
