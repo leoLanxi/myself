@@ -2,7 +2,8 @@ name: Deploy Static to GitHub Pages
 
 on:
   push:
-    branches: [ static-site ]
+    branches: [ main ]
+  workflow_dispatch:
 
 permissions:
   contents: read
