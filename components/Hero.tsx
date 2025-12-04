@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Github, Twitter, Linkedin } from 'lucide-react';
+import { ArrowRight, Github, PlayCircle, Sparkles } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const preFiles = import.meta.glob('../assets/pre/*.{jpg,jpeg,png,webp}', { eager: true, as: 'url' });
@@ -20,10 +20,10 @@ const Hero: React.FC = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-            AI Apprentice & Backend Engineer |
+             Backend Engineer |
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">
-              Go Developer
+              AI Apprentice
             </span>
           </h1>
           
@@ -36,9 +36,9 @@ const Hero: React.FC = () => {
               View My Work <ArrowRight size={18} />
             </a>
             <div className="flex items-center gap-4 px-4">
-              <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors"><Github size={24} /></a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors"><Twitter size={24} /></a>
-              <a href="#" className="text-gray-400 hover:text-blue-700 transition-colors"><Linkedin size={24} /></a>
+              <a href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors"><Github size={24} /></a>
+              <a href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors"><PlayCircle size={24} /></a>
+              <a href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-500 transition-colors"><Sparkles size={24} /></a>
             </div>
           </div>
           

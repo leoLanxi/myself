@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, Terminal, Camera, BookOpen, FileText } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [workOpen, setWorkOpen] = useState(false);
+  const workTimer = useRef<any>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,8 +17,7 @@ const Header: React.FC = () => {
 
   const navLinks = [
     { name: 'Resume', href: 'resume', icon: <FileText size={18} /> },
-    { name: 'Photography', href: '#photography', icon: <Camera size={18} /> },
-    { name: 'Blog', href: '#blog', icon: <BookOpen size={18} /> },
+    { name: 'Games', href: 'http://124.221.198.43/', icon: <Terminal size={18} /> },
   ];
 
   return (
@@ -45,13 +46,49 @@ const Header: React.FC = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          <a 
-            href="#work" 
-            className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+          <div 
+            className="relative"
+            onMouseEnter={() => {
+              if (workTimer.current) clearTimeout(workTimer.current);
+              setWorkOpen(true);
+            }}
+            onMouseLeave={() => {
+              if (workTimer.current) clearTimeout(workTimer.current);
+              workTimer.current = setTimeout(() => setWorkOpen(false), 250);
+            }}
           >
-            <Terminal size={18} />
-            Work
-          </a>
+            <a 
+              href="#work" 
+              className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <Terminal size={18} />
+              Work
+            </a>
+            <div 
+              className={`absolute mt-2 left-0 w-44 bg-white border border-gray-100 shadow-lg rounded-xl p-2 transition-all duration-200 ${workOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-1 pointer-events-none'}`}
+              onMouseEnter={() => {
+                if (workTimer.current) clearTimeout(workTimer.current);
+                setWorkOpen(true);
+              }}
+              onMouseLeave={() => {
+                if (workTimer.current) clearTimeout(workTimer.current);
+                workTimer.current = setTimeout(() => setWorkOpen(false), 250);
+              }}
+            >
+              <a 
+                href="#photography" 
+                className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg"
+              >
+                <Camera size={16} /> Photography
+              </a>
+              <a 
+                href="#blog" 
+                className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg"
+              >
+                <BookOpen size={16} /> Blog
+              </a>
+            </div>
+          </div>
           {navLinks.map((link) => (
             <a 
               key={link.name} 
@@ -90,6 +127,22 @@ const Header: React.FC = () => {
             >
               <Terminal size={18} /> Work
             </a>
+            <div className="pl-6 flex flex-col">
+              <a 
+                href="#photography"
+                className="flex items-center gap-3 p-2 text-gray-700 hover:bg-gray-50 rounded-lg"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Camera size={16} /> Photography
+              </a>
+              <a 
+                href="#blog"
+                className="flex items-center gap-3 p-2 text-gray-700 hover:bg-gray-50 rounded-lg"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <BookOpen size={16} /> Blog
+              </a>
+            </div>
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
