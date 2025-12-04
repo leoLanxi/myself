@@ -14,7 +14,7 @@ const Header: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Resume', href: '/resume', icon: <FileText size={18} /> },
+    { name: 'Resume', href: 'resume', icon: <FileText size={18} /> },
     { name: 'Photography', href: '#photography', icon: <Camera size={18} /> },
     { name: 'Blog', href: '#blog', icon: <BookOpen size={18} /> },
   ];
@@ -26,7 +26,17 @@ const Header: React.FC = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="/" className="flex items-center gap-2 group">
+        <a
+          href="#"
+          className="flex items-center gap-2 group"
+          onClick={(e) => {
+            e.preventDefault();
+            const seg = window.location.pathname.split('/')[1];
+            const base = seg ? `/${seg}/` : '/';
+            window.history.pushState({}, '', base);
+            window.dispatchEvent(new PopStateEvent('popstate'));
+          }}
+        >
           <div className="w-8 h-8 bg-black text-white rounded-lg flex items-center justify-center font-mono font-bold text-lg group-hover:bg-blue-600 transition-colors">
             Z
           </div>

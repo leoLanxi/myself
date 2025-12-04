@@ -5,14 +5,14 @@
     <title>Redirecting...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
-      (function() {
+      (function () {
         var l = window.location;
-        // Base path like /repo-name/
-        var parts = l.pathname.split('/');
-        // remove last segment (404.html)
-        parts.pop();
-        var base = parts.join('/') + '/';
-        var target = base + '?' + 'p=' + encodeURIComponent(l.pathname.replace(base, '')) + (l.search ? '&q=' + encodeURIComponent(l.search.slice(1)) : '') + (l.hash || '');
+        var segs = l.pathname.split('/');
+        // For project pages, pathname = /<repo>/<path>
+        var repo = segs.length > 1 ? segs[1] : '';
+        var base = repo ? '/' + repo + '/' : '/';
+        var pathWithin = l.pathname.slice(base.length);
+        var target = base + '?p=' + encodeURIComponent(pathWithin) + (l.search ? '&q=' + encodeURIComponent(l.search.slice(1)) : '') + (l.hash || '');
         l.replace(target);
       })();
     </script>
