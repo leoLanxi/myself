@@ -2,7 +2,10 @@ import React from 'react';
 import { ArrowRight, Github, Twitter, Linkedin } from 'lucide-react';
 
 const Hero: React.FC = () => {
-  const portraitSrc = (import.meta.env?.VITE_PROFILE_IMAGE_URL as string) || 'https://picsum.photos/800/800?grayscale';
+  const preFiles = import.meta.glob('../assets/pre/*.{jpg,jpeg,png,webp}', { eager: true, as: 'url' });
+  const preEntries = Object.entries(preFiles).map(([p, url]) => ({ p, url: url as string })).sort((a, b) => a.p.localeCompare(b.p));
+  const portraitEnv = (import.meta.env?.VITE_PROFILE_IMAGE_URL as string) || '';
+  const portraitSrc = preEntries[0]?.url || portraitEnv || 'https://picsum.photos/800/800?grayscale';
   return (
     <section id="work" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
       {/* Background Decor */}
@@ -17,11 +20,11 @@ const Hero: React.FC = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-            Backend Engineer.<br />
+            AI Apprentice & Backend Engineer |
+            <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">
-              Golang & Distributed Systems.
-            </span><br />
-            Performance Tuner.
+              Go Developer
+            </span>
           </h1>
           
           <p className="text-lg text-gray-600 max-w-lg leading-relaxed">
